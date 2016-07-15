@@ -44,9 +44,11 @@ Copier.prototype.copyAssets = function (type, assets) {
       if (isFile) {
         var destination = path.join(destinationDir, path.basename(source));
         grunt.file.copy(source, destination);
+        grunt.log.writeln("copying ".cyan + "" + source + " -> " + destination.grey);
 
       } else {
         grunt.file.mkdir(destinationDir);
+        grunt.log.writeln("copying ".cyan + " dir " + source + " -> " + destination.grey);
 
         //fs.copySync(source, destination, { clobber: true, dereference: true });
       }

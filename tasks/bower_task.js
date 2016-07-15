@@ -64,8 +64,7 @@ module.exports = function (grunt) {
   function copy(options, callback) {
     var bowerAssets = new BowerAssets(bower, options.cwd);
     bowerAssets.on("end", function (assets) {
-      var copier = new AssetCopier(assets, options, function (source, destination, isFile) {
-        //log("grunt-bower " + "copying ".cyan + ((isFile ? "" : " dir ") + source + " -> " + destination).grey);
+        var copier = new AssetCopier(assets, options, function (source, destination, isFile) {
       });
 
       copier.once("copied", callback);
