@@ -2,9 +2,9 @@ var _ = require('lodash');
 var Emitter = require('events').EventEmitter;
 var path = require('path');
 var grunt = require('grunt');
-var fs = require('fs-extra');
+var fs = require('fs');
 
-var Copier = function(assets, options, report) {
+var Copier = function (assets, options, report) {
   this.assets = assets;
   this.options = options;
   this.report = report;
@@ -13,9 +13,9 @@ var Copier = function(assets, options, report) {
 Copier.prototype = Object.create(Emitter.prototype);
 Copier.prototype.constructor = Copier;
 
-Copier.prototype.copy = function() {
+Copier.prototype.copy = function () {
   var error;
-  _(this.assets).each(function(typedAssets, type) {
+  _(this.assets).each(function (typedAssets, type) {
     try {
       this.copyAssets(type, typedAssets);
     } catch (err) {
@@ -32,22 +32,23 @@ Copier.prototype.copy = function() {
   return this;
 };
 
-Copier.prototype.copyAssets = function(type, assets) {
+Copier.prototype.copyAssets = function (type, assets) {
   var self = this;
-  _(assets).each(function(sources, pkg) {
-    _(sources).each(function(source) {
-      var destination;
 
-      var isFile = fs.statSync(source).isFile();
+  _(assets).each(function (sources, pkg) {
+    _(sources).each(function (source) {
+
+      var isFile = grunt.file.isFile(source);
       var destinationDir = path.join(self.options.targetDir, self.options.layout(type, pkg, source));
-      grunt.file.mkdir(destinationDir);
-      if (isFile) {
-        destination = path.join(destinationDir, path.basename(source));
-        grunt.file.copy(source, destination);
-      } else {
-        destination = destinationDir;
 
-        fs.copySync(source, destination, {clobber: true, dereference: true});
+      if (isFile) {
+        var destination = path.join(destinationDir, path.basename(source));
+        grunt.file.copy(source, destination);
+
+      } else {
+        grunt.file.mkdir(destinationDir);
+
+        //fs.copySync(source, destination, { clobber: true, dereference: true });
       }
       self.report(source, destination, isFile);
     });

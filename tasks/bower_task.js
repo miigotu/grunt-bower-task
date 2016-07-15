@@ -65,7 +65,7 @@ module.exports = function (grunt) {
     var bowerAssets = new BowerAssets(bower, options.cwd);
     bowerAssets.on("end", function (assets) {
       var copier = new AssetCopier(assets, options, function (source, destination, isFile) {
-        log("grunt-bower " + "copying ".cyan + ((isFile ? "" : " dir ") + source + " -> " + destination).grey);
+        //log("grunt-bower " + "copying ".cyan + ((isFile ? "" : " dir ") + source + " -> " + destination).grey);
       });
 
       copier.once("copied", callback);
@@ -88,8 +88,6 @@ module.exports = function (grunt) {
       .on("error", fail)
       .on("end", callback);
   }
-
-
 
   function prune(options, callback) {
     bower.commands.prune([], options.bowerOptions)
