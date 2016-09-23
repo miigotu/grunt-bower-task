@@ -1,13 +1,17 @@
-var _ = require('lodash');
 var Emitter = require('events').EventEmitter;
-var path = require('path');
-var grunt = require('grunt');
 var fs = require('fs');
+var grunt = require('grunt');
+var _ = require('lodash');
+var path = require('path');
+var logger = require("./log");
 
 var Copier = function (assets, options, report) {
   this.assets = assets;
   this.options = options;
   this.report = report;
+
+  grunt.log.writeln("Copier constructor");
+  logger = new Log();
 };
 
 Copier.prototype = Object.create(Emitter.prototype);
@@ -44,15 +48,19 @@ Copier.prototype.copyAssets = function (type, assets) {
       if (isFile) {
         var destination = path.join(destinationDir, path.basename(source));
         grunt.file.copy(source, destination);
-        grunt.log.writeln("copying ".cyan + "" + source + " -> " + destination.grey);
+        grunt.log.writeln("CopyAssets 1");
+        logger.info("copied " + source + " => " + destination);
+        //grunt.log.writeln("copying ".cyan + "" + source + " -> " + destination.grey);
 
       } else {
         grunt.file.mkdir(destinationDir);
-        grunt.log.writeln("copying ".cyan + " dir " + source + " -> " + destination.grey);
+        grunt.log.writeln("CopyAssets 2");
+        logger.info("copied dir " + source + " => " + destinationDir);
+        //grunt.log.writeln("copying ".cyan + " dir " + source + " -> " + destination.grey);
 
         //fs.copySync(source, destination, { clobber: true, dereference: true });
       }
-      self.report(source, destination, isFile);
+      self.report(source, destinationDir, isFile);
     });
   });
 };
