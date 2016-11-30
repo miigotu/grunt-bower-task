@@ -34,11 +34,11 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "async": "2.0.0",
+    "async": "2.1.4",
     "bower": "^1.7.9",
     "bower-json": "^0.8.1",
     "colors": "^1.1.2",
-    "fs-extra": "^0.30.0",
+    "fs-extra": "^1.0.0",
     "lodash": "~0.10.0",
     "rimraf": "^2.5.3"
   },
