@@ -3,10 +3,7 @@
   "description": "Install Bower packages.",
   "version": "0.5.0",
   "homepage": "https://github.com/yatskevich/grunt-bower-task",
-  "author": {
-    "name": "Ivan Yatskevich",
-    "email": "ivan@yatskevich.com"
-  },
+  "author": "Ivan Yatskevich <ivan@yatskevich.com>",
   "contributors": [
     {
       "name": "Tyler Hughes",
@@ -17,10 +14,7 @@
       "url": "https://github.com/fantactuka"
     }
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/yatskevich/grunt-bower-task.git"
-  },
+  "repository": "git://github.com/yatskevich/grunt-bower-task.git",
   "bugs": {
     "url": "https://github.com/yatskevich/grunt-bower-task/issues"
   },
@@ -39,7 +33,7 @@
   },
   "dependencies": {
     "async": "^2.3.0",
-    "bower": "^1.7.9",
+    "bower": "^1.8.8",
     "bower-json": "^0.8.1",
     "colors": "^1.1.2",
     "fs-extra": "^2.1.2",
@@ -57,5 +51,6 @@
   "keywords": [
     "gruntplugin",
     "bower"
-  ]
+  ],
+  "license": "MIT"
 }
